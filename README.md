@@ -19,5 +19,10 @@ npm install
 gulp build
 ```
 
+### Create your workspace
+_Tmux is required_
+
+Use `create_workspace.sh`
+
 ### Check starter page here
 [http://localhost:3000/](http://localhost:3000/)
