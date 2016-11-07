@@ -13,7 +13,7 @@ app.set('port', (process.env.PORT || CONFIG.PORT));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/js', express.static(path.join(__dirname, 'public', 'js')));
 
 /* Code start */
 

@@ -8,6 +8,7 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import Routing from './components/Routing.js';
 import RootReducer from './reducers'
+import style from '../css/style.css'
 
 const logger = createLogger()
 const createStoreMiddleware = applyMiddleware(
