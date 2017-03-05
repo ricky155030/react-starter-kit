@@ -1,27 +1,26 @@
 'use strict';
 
-var express = require('express');
 var path = require('path');
-var rewrite = require('express-urlrewrite');
-var bodyParser = require('body-parser');
+var webpack = require('webpack');
+var express = require('express');
+var webpackDevServer = require('webpack-dev-server');
+var config = require('./webpack.config');
+
 var app = express();
+var compiler = webpack(config);
 
-var CONFIG = require('./config')
+new webpackDevServer(compiler, {
+  hot: true,
+  stats: { colors: true },
+  historyApiFallback: true,
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: true
+  },
+}).listen(3000, function (err) {
+  if (err) {
+    return console.error(err);
+  }
 
-app.set('port', (process.env.PORT || CONFIG.PORT));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-
-app.use('/static', express.static(path.join(__dirname, 'public')));
-
-/* Code start */
-
-/*  Code end  */
-
-app.use(rewrite('/*', '/'));
-app.use('/', express.static(path.join(__dirname, 'public')));
-
-app.listen(app.get('port'), () => {
-  console.log('Server started: http://' + CONFIG.HOSTNAME + ':' + app.get('port') + '/');
+  console.log('Listening at http://localhost:3000/');
 });
