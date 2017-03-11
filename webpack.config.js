@@ -17,8 +17,10 @@ const indexTemplate = new htmlWebpackPlugin({
 })
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'eval-source-map',
   entry: [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
     'react-hot-loader/patch',
     __dirname + '/app/js/index.js'
   ],
@@ -39,7 +41,12 @@ module.exports = {
     host: HOST
   },
   plugins: [
+    indexTemplate,
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    indexTemplate
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
   ]
 }
