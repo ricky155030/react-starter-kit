@@ -19,8 +19,7 @@ const indexTemplate = new htmlWebpackPlugin({
 module.exports = {
   devtool: 'eval-source-map',
   entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
+    'webpack-hot-middleware/client?reload=true',
     'react-hot-loader/patch',
     __dirname + '/app/js/index.js'
   ],

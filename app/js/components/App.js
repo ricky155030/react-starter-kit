@@ -10,7 +10,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>React-Starter-Kit</h1>
+        <h1 onClick={() => this.props.router.push('/test')}>React-Starter-Kit</h1>
         <h3>{this.props.example}</h3>
       </div>
     )
