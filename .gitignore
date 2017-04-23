@@ -1,6 +1,8 @@
 node_modules
 *.swp
 /public/css/bundle.css
+/public/css/bundle.css
 /public/js/bundle.js
 /public/index.html
 *.log
+*.map
