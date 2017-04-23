@@ -1,20 +1,28 @@
+import React from 'react'
 import { connect } from 'react-redux'
-import App from '../components/App'
 
-const mapStateToProps = function(state) {
+class AppContainer extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <div>
+        <h1 onClick={() => this.props.router.push('/test')}>React-Starter-Kit</h1>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = state => {
   return {
     example: state.example.text
   }
 }
 
-const mapDispatchToProps = function(dispatch) {
-  return {
-  }
+const mapDispatchToProps = dispatch => {
+  return {}
 }
 
-const AppContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
-
-export default AppContainer
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer)
