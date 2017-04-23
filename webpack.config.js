@@ -11,41 +11,40 @@ const indexTemplate = new htmlWebpackPlugin({
   links: [
     'https://fonts.googleapis.com/css?family=Roboto'
   ],
-  scripts: [
-    'public/js/handsontable.full.js'
-  ]
+  scripts: []
 })
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'inline-source-map',
   entry: [
-    'webpack-hot-middleware/client?reload=true',
     'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
     __dirname + '/app/js/index.js'
   ],
   output: {
     path: path.join(__dirname, 'public'),
-    filename: 'js/bundle.js'
+    publicPath: '/js/',
+    filename: 'bundle.js'
   },
-  module: {
-    loaders
-  },
+  module: loaders,
+  plugins: [
+    indexTemplate,
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
+  ],
   devServer: {
     contentBase: "./public",
     noInfo: true,
     hot: true,
     inline: true,
+    overlay: true,
     historyApiFallback: true,
     port: PORT,
     host: HOST
-  },
-  plugins: [
-    indexTemplate,
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
-    })
-  ]
+  }
 }

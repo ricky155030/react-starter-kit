@@ -17,30 +17,16 @@ const indexTemplate = new htmlWebpackPlugin({
 })
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'source-map',
   entry: [
     path.join(__dirname, 'app/js/index.js')
   ],
   output: {
-    path: path.join(__dirname, 'public'),
-    publicPath: 'http://localhost:3000/',
     filename: 'js/bundle.js'
+    path: path.join(__dirname, 'public'),
+    publicPath: '/',
   },
-  module: {
-    loaders
-  },
-  devServer: {
-    contentBase: "./public",
-    noInfo: true,
-    hot: true,
-    inline: true,
-    historyApiFallback: true,
-    port: PORT,
-    host: HOST,
-    watchOptions: {
-      poll: true
-    }
-  },
+  module: loaders,
   plugins: [
     new WebpackCleanupPlugin(),
     new webpack.DefinePlugin({
@@ -49,6 +35,8 @@ module.exports = {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      comments: false,
       compress: {
         warnings: false,
         screw_ie8: true,
@@ -56,7 +44,6 @@ module.exports = {
         drop_debugger: true
       }
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
     indexTemplate,
   ]
 }

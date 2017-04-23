@@ -1,10 +1,8 @@
-'use strict';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import { AppContainer } from 'react-hot-loader';
 import RootReducer from './reducers'
 import style from '../css/style.css'

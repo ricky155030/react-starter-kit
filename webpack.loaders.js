@@ -1,15 +1,18 @@
-module.exports = [
-  {
-    test: /\.js?$/,
-    exclude: /(node_modules|public)/,
-    loader: "babel"
-  },
-  { 
-    test: /\.json$/, 
-    loader: 'json' 
-  },
-  { 
-    test: /\.css$/, 
-    loader: 'style!css' 
-  }
-]
+module.exports = {
+  rules: [
+    {
+      test: /\.js?$/,
+      use: [
+        'babel-loader'
+      ],
+      exclude: /(node_modules|public)/,
+    },
+    { 
+      test: /\.css$/, 
+      use: [
+        'style-loader',
+        'css-loader'
+      ]
+    }
+  ]
+}

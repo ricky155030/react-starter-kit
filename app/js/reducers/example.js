@@ -1,5 +1,3 @@
-'use strict'
-
 const initialState = {
   text: 'Example Text from redux'
 }
