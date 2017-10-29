@@ -1,3 +1,5 @@
+var path = require('path')
+
 module.exports = {
   rules: [
     {
@@ -5,14 +7,15 @@ module.exports = {
       use: [
         'babel-loader'
       ],
-      exclude: /(node_modules|public)/,
+      include: path.resolve(__dirname, 'app/js')
     },
     { 
       test: /\.css$/, 
       use: [
         'style-loader',
         'css-loader'
-      ]
+      ],
+      include: path.resolve(__dirname, 'app/css')
     }
   ]
 }

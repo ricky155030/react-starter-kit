@@ -1,10 +1,9 @@
 'use strict';
 
 const config = {
-  ENV_TYPE: 'DEV',
-  PORT: 3000,
+  devPort: 3000,
+  devHost: 'localhost',
+  projectName: 'React-Starter-Kit'
 }
-
-config.HOSTNAME = 'localhost'
 
 module.exports = config

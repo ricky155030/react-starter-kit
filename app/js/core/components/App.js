@@ -7,7 +7,7 @@ import {
 
 const Example = () => (
   <div>
-    <h2>Example</h2>
+    <h2>Exampleaaa</h2>
   </div>
 )
 

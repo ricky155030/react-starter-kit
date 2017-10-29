@@ -3,13 +3,16 @@ var loaders = require('./webpack.loaders')
 var path = require('path')
 var htmlWebpackPlugin = require('html-webpack-plugin')
 var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
+var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 
-const HOST = process.env.HOST || "127.0.0.1";
-const PORT = process.env.PORT || "3000";
+var {
+  projectName
+} = require('./config')
 
 const indexTemplate = new htmlWebpackPlugin({
   alwaysWriteToDisk: true,
   filename: 'index.html',
+  title: `${projectName}`,
   template: __dirname + '/app/index.html',
   links: [
     'https://fonts.googleapis.com/css?family=Roboto'
@@ -18,14 +21,13 @@ const indexTemplate = new htmlWebpackPlugin({
 })
 
 module.exports = {
-  devtool: 'inline-source-map',
-  entry: [
-    './app/js/index.js'
-  ],
+  entry: {
+    bundle: './app/js/index.js'
+  },
   output: {
-    path: path.join(__dirname, 'public'),
+    publicPath: '/js/',
     filename: 'bundle.js',
-    publicPath: '/js/'
+    path: path.join(__dirname, 'public')
   },
   module: loaders,
   resolve: {
@@ -37,21 +39,6 @@ module.exports = {
   plugins: [
     indexTemplate,
     new HtmlWebpackHarddiskPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.NamedModulesPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
-    })
-  ],
-  devServer: {
-    contentBase: "./public",
-    noInfo: false,
-    hot: true,
-    inline: true,
-    overlay: true,
-    historyApiFallback: true,
-    port: PORT,
-    host: HOST
-  }
+    new WebpackCleanupPlugin()
+  ]
 }
